@@ -1,0 +1,10 @@
+language = "nix"
+modules = ["nodejs-22", "python-with-prybar-3.10"]
+run = "node index.js"
+
+[agent]
+expertMode = true
+
+[[ports]]
+localPort = 3000
+externalPort = 80
