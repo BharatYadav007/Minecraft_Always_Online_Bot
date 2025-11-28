@@ -1,6 +1,6 @@
 {
- "ip": "Your.server.ip",
- "port": "yourportnumber",
+ "ip": "GaymersProMax.aternos.me",
+ "port": "59413",
  "name": "OnlineBOT",  
  "auto-night-skip": "false",
  "loginmsg": "OnlineBOT"
