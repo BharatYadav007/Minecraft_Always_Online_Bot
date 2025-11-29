@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build step required for Node.js project'",
+    "dev": "node index.js",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'",
+    "clean": "echo 'Cleaning...' && del /Q node_modules 2>nul || true"
   },
+  "author": "BharatYadav",
+  "license": "ISC",
   "dependencies": {
     "config": "^4.1.1",
     "fs": "^0.0.1-security",
