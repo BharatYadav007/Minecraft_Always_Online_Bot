@@ -3,6 +3,5 @@
  "port": "59413",
  "name": "OnlineBOT",  
  "auto-night-skip": "false",
- "loginmsg": "OnlineBOT"
+ "loginmsg": "The server will always be online!"
 }
-
