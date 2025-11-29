@@ -1,4 +1,5 @@
 language = "nix"
+modules = ["nodejs-22", "python-with-prybar-3.10"]
 run = "node index.js"
 
 [agent]
