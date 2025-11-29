@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm start"
+    "start": "node index.js"
   },
   "dependencies": {
     "config": "^4.1.1",
     "fs": "^0.0.1-security",
-    "mineboty": "^5.0.1",
+    "mineboty": "^3.4.22",
     "mineflayer": "^4.33.0",
     "prismarine-viewer": "^1.33.0"
   }
