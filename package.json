@@ -1,23 +1,24 @@
 {
   "name": "onlinebot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Minecraft always-online bot that generates config.json from .env and runs through mineboty.",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "echo 'No build step required for Node.js project'",
-    "dev": "node index.js",
-    "test": "echo 'No tests specified'",
-    "lint": "echo 'No linting configured'",
-    "clean": "echo 'Cleaning...' && del /Q node_modules 2>nul || true"
+    "dev": "node --watch index.js",
+    "check": "node --check index.js"
   },
   "author": "BharatYadav",
   "license": "ISC",
+  "keywords": [
+    "minecraft",
+    "bot",
+    "mineboty",
+    "mineflayer",
+    "aternos"
+  ],
   "dependencies": {
-    "config": "^4.1.1",
-    "fs": "^0.0.1-security",
-    "mineboty": "^3.4.22",
-    "mineflayer": "^4.33.0",
-    "prismarine-viewer": "^1.33.0"
+    "mineboty": "^3.4.22"
   }
 }
