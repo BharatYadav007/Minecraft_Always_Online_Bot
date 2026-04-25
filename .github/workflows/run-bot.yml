@@ -3,7 +3,7 @@ name: Run Minecraft Bot
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */4 * * *"
 
 concurrency:
   group: minecraft-bot
@@ -12,13 +12,13 @@ concurrency:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    environment: production
-    timeout-minutes: 360
+    environment: online-bot
+    timeout-minutes: 245
     env:
       MINECRAFT_SERVER_IP: ${{ vars.MINECRAFT_SERVER_IP }}
       MINECRAFT_SERVER_PORT: ${{ vars.MINECRAFT_SERVER_PORT }}
       MINECRAFT_BOT_NAME: ${{ vars.MINECRAFT_BOT_NAME }}
-      MINECRAFT_PASSWORD: ${{ vars.MINECRAFT_PASSWORD }}
+      MINECRAFT_PASSWORD: ${{ secrets.MINECRAFT_PASSWORD }}
       MINECRAFT_AUTH: ${{ vars.MINECRAFT_AUTH }}
       MINECRAFT_AUTO_NIGHT_SKIP: ${{ vars.MINECRAFT_AUTO_NIGHT_SKIP }}
       MINECRAFT_LOGIN_MESSAGE: ${{ vars.MINECRAFT_LOGIN_MESSAGE }}

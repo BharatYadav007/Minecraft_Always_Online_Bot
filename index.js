@@ -43,10 +43,39 @@ function loadEnvFile(filePath) {
 }
 
 function requiredEnv(name) {
-  const value = process.env[name];
+  const value = process.env[name]?.trim();
 
   if (!value) {
     throw new Error(`Missing required environment variable: ${name}`);
+  }
+
+  return value;
+}
+
+function optionalEnv(name, fallback = "") {
+  return process.env[name]?.trim() || fallback;
+}
+
+function envPort(name, fallback = "25565") {
+  const value = optionalEnv(name, fallback);
+  const port = Number.parseInt(value, 10);
+
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(
+      `Invalid ${name}: expected a number between 1 and 65535, received "${value}"`
+    );
+  }
+
+  return String(port);
+}
+
+function envBooleanString(name, fallback = "false") {
+  const value = optionalEnv(name, fallback).toLowerCase();
+
+  if (value !== "true" && value !== "false") {
+    throw new Error(
+      `Invalid ${name}: expected "true" or "false", received "${value}"`
+    );
   }
 
   return value;
@@ -56,12 +85,12 @@ loadEnvFile(envPath);
 
 const config = {
   ip: requiredEnv("MINECRAFT_SERVER_IP"),
-  port: requiredEnv("MINECRAFT_SERVER_PORT"),
-  name: requiredEnv("MINECRAFT_BOT_NAME"),
-  password: process.env.MINECRAFT_PASSWORD || "",
-  auth: process.env.MINECRAFT_AUTH || "offline",
-  "auto-night-skip": process.env.MINECRAFT_AUTO_NIGHT_SKIP || "false",
-  loginmsg: process.env.MINECRAFT_LOGIN_MESSAGE || "",
+  port: envPort("MINECRAFT_SERVER_PORT"),
+  name: optionalEnv("MINECRAFT_BOT_NAME", "OnlineBOT"),
+  password: optionalEnv("MINECRAFT_PASSWORD"),
+  auth: optionalEnv("MINECRAFT_AUTH", "offline").toLowerCase(),
+  "auto-night-skip": envBooleanString("MINECRAFT_AUTO_NIGHT_SKIP"),
+  loginmsg: optionalEnv("MINECRAFT_LOGIN_MESSAGE", "The server will always be online!"),
 };
 
 fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`, "utf8");

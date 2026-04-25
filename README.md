@@ -34,13 +34,13 @@ This project runs a Minecraft bot that connects to a server and helps keep it ac
 npm install
 ```
 
-2. Create your local env file from the example:
+1. Create your local env file from the example:
 
 ```bash
 copy .env.example .env
 ```
 
-3. Edit `.env` with your server details:
+1. Edit `.env` with your server details:
 
 ```env
 MINECRAFT_SERVER_IP=play.example.com
@@ -65,12 +65,33 @@ This will regenerate `config.json` from `.env` and then launch the bot.
 ## Available Configuration
 
 - `MINECRAFT_SERVER_IP`: Minecraft server hostname or IP.
-- `MINECRAFT_SERVER_PORT`: Server port.
-- `MINECRAFT_BOT_NAME`: Bot username.
+- `MINECRAFT_SERVER_PORT`: Server port. Defaults to `25565`.
+- `MINECRAFT_BOT_NAME`: Bot username. Defaults to `OnlineBOT`.
 - `MINECRAFT_PASSWORD`: Password if your auth flow requires one.
 - `MINECRAFT_AUTH`: Auth mode, typically `offline` unless your setup needs something else.
-- `MINECRAFT_AUTO_NIGHT_SKIP`: Set to `true` to make the bot try to set day automatically at night.
-- `MINECRAFT_LOGIN_MESSAGE`: Message the bot sends after login.
+- `MINECRAFT_AUTO_NIGHT_SKIP`: Set to `true` to make the bot try to set day automatically at night. Must be `true` or `false`.
+- `MINECRAFT_LOGIN_MESSAGE`: Message the bot sends after login. Defaults to `The server will always be online!`.
+
+## GitHub Actions Environment
+
+The workflow in [.github/workflows/run-bot.yml](d:\GitHub Repo\Personal projects\Minecraft_Always_Online_Bot\.github\workflows\run-bot.yml:1) already runs with `environment: online-bot`, so add your values in GitHub under:
+
+`Settings -> Environments -> online-bot`
+
+Add these as **Environment variables**:
+
+- `MINECRAFT_SERVER_IP`
+- `MINECRAFT_SERVER_PORT`
+- `MINECRAFT_BOT_NAME`(optional)
+- `MINECRAFT_AUTH`(optional)
+- `MINECRAFT_AUTO_NIGHT_SKIP`(optional)
+- `MINECRAFT_LOGIN_MESSAGE`(optional)
+
+Add this as an **Environment secret**:
+
+- `MINECRAFT_PASSWORD`(optional)
+
+This split keeps the password out of plain repo/environment vars while still letting the workflow inject everything at runtime.
 
 ## Notes
 
