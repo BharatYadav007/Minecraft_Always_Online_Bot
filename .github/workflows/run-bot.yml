@@ -1,0 +1,42 @@
+name: Run Minecraft Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+concurrency:
+  group: minecraft-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      MINECRAFT_SERVER_IP: ${{ secrets.MINECRAFT_SERVER_IP }}
+      MINECRAFT_SERVER_PORT: ${{ secrets.MINECRAFT_SERVER_PORT }}
+      MINECRAFT_BOT_NAME: ${{ secrets.MINECRAFT_BOT_NAME }}
+      MINECRAFT_PASSWORD: ${{ secrets.MINECRAFT_PASSWORD }}
+      MINECRAFT_AUTH: ${{ secrets.MINECRAFT_AUTH }}
+      MINECRAFT_AUTO_NIGHT_SKIP: ${{ secrets.MINECRAFT_AUTO_NIGHT_SKIP }}
+      MINECRAFT_LOGIN_MESSAGE: ${{ secrets.MINECRAFT_LOGIN_MESSAGE }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate startup script
+        run: npm run check
+
+      - name: Run bot
+        run: npm start
