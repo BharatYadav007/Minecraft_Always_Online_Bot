@@ -12,6 +12,7 @@ concurrency:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 360
     env:
       MINECRAFT_SERVER_IP: ${{ secrets.MINECRAFT_SERVER_IP }}
